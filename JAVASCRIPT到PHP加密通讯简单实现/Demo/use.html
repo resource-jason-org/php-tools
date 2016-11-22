@@ -1,0 +1,32 @@
+<html>
+	<head>
+	<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+	<script type="text/javascript" src="js/jquery.min.js"></script>
+	<script type="text/javascript" src="BigInt.js"></script>
+	<script type="text/javascript" src="Barrett.js"></script>
+	<script type="text/javascript" src="RSA.js"></script>
+	<script>
+		$(document).ready(function(){  
+		//十六进制公钥  
+		var rsa_n = "CF69D57A7E25F0B39011F8DA70947D3A3FCE93DE7CC3913E5484E49FD00BBE01C08AD4A93EBD81BCA013B63BA7E54686071643A26468FDB199D2608526FF62F5618BCACD28DEAB83E79CAEC73EE68AC6C03E2C4988D552FA7B5D3CFEE847DE35DC770E67D496FA0DBCE716C37464846E7E328E8C17070E716444A9C85E2E35F3";  
+		      
+		$("#su").click(function(){  
+		    setMaxDigits(131); //131 => n的十六进制位数/2+3  
+		    var key      = new RSAKeyPair("010001", '', rsa_n); //10001 => e的十六进制  
+		    var password = $("#password").val();  
+		    password = encryptedString(key, password); //不支持汉字  
+		    $("#password").val(password); 
+			 
+		    $("#login").submit();  
+		    //alert(password); //test  
+			console.log(password);
+		 });  
+		});  
+	</script>
+	</head>
+	<form action="index.php" method="post" id='login' >
+	<input type="text" value="" name='password' id="password" /> 
+	<input type="button" value="Continue" id="su" /> 
+	</form>
+	
+</html>
